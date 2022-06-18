@@ -1,7 +1,7 @@
 const form = document.querySelector('form');
 let infos = getInfo() || [];
 const tbody = document.querySelector('tbody');
-console.log(infos);
+const modal = document.querySelector('.modal');
 
 function renderList() {
   tbody.innerHTML = infos
@@ -16,13 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 form.addEventListener('submit', (e) => {
+  e.preventDefault();
   const title = form.elements.title;
   const author = form.elements.author;
   const isbn = form.elements.isbn;
-
-  e.preventDefault();
   if (!title.value || !author.value) {
-    alert('You must enter a title an and ahthor');
+    displayModal('failed', 'You must enter a title an and author');
     return;
   }
 
@@ -35,8 +34,8 @@ form.addEventListener('submit', (e) => {
   };
   infos.push(info);
   setInfo();
-
-  tbody.innerHTML += createInfo(title.value, author.value, isbn.value, id);
+  renderList();
+  displayModal('success', 'some info added successfully');
 
   title.value = '';
   author.value = '';
@@ -56,10 +55,13 @@ function createInfo(title, author, isbn, id) {
 
 tbody.addEventListener('click', (e) => {
   if (e.target.classList.contains('btn-delete')) {
-    const id = e.target.parentElement.getAttribute('data-id');
-    infos = infos.filter((info) => info.id != id);
-    setInfo();
-    renderList();
+    if (confirm('Are you sure you want to delete this info?')) {
+      const id = e.target.parentElement.getAttribute('data-id');
+      infos = infos.filter((info) => info.id != id);
+      setInfo();
+      renderList();
+      displayModal('success', 'info removed successfully');
+    }
   }
 });
 
@@ -69,4 +71,12 @@ function setInfo() {
 
 function getInfo() {
   return JSON.parse(localStorage.getItem('infos'));
+}
+
+function displayModal(type, message) {
+  modal.classList.add('open', type);
+  modal.textContent = message;
+  setTimeout(() => {
+    modal.classList.remove('open', type);
+  }, 2000);
 }
