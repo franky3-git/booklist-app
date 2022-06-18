@@ -1,0 +1,67 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
+.app-container {
+  max-width: 600px;
+  margin: 20px auto;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 3rem;
+}
+h1 i {
+  color: dodgerblue;
+}
+h1 span {
+  color: dodgerblue;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+label {
+  text-transform: capitalize;
+  margin-bottom: 7px;
+}
+input {
+  border: none;
+  background-color: #f6f6f6;
+  height: 40px;
+  border-radius: 3px;
+  padding-left: 5px;
+}
+.btn {
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: dodgerblue;
+  padding: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.booklist {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+thead {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  height: 35px;
+}
+tbody tr {
+  height: 30px;
+}
+.btn-delete {
+  cursor: pointer;
+}
